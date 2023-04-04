@@ -25,7 +25,7 @@ public class TestStudent {
     UI ui;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         StudentValidator studentValidator = new StudentValidator();
         TemaValidator temaValidator = new TemaValidator();
         String filenameStudent = "fisiere/Studenti.xml";
@@ -40,7 +40,7 @@ public class TestStudent {
     }
 
     @Test
-    void addStudentSuccesfully(){
+    void addStudentSuccesfully() {
         Student student = new Student("999", "Ion", 935, "mail@mail.com");
 
         service.addStudent(student);
@@ -50,7 +50,7 @@ public class TestStudent {
     }
 
     @Test
-    void addStudentIdEmpty(){
+    void addStudentIdEmpty() {
         Student student = new Student("", "Ion", 935, "mail@mail.com");
         assertThrows(ValidationException.class, () -> {
             service.addStudent(student);
@@ -58,7 +58,7 @@ public class TestStudent {
     }
 
     @Test
-    void addStudentNameEmpty(){
+    void addStudentNameEmpty() {
         Student student = new Student("123", "", 935, "mail@mail.com");
         assertThrows(ValidationException.class, () -> {
             service.addStudent(student);
@@ -72,8 +72,24 @@ public class TestStudent {
     }
 
     @Test
+    void addStudentNameTooShort() {
+        Student student = new Student("123", "a", 935, "mail@mail.com");
+        assertThrows(ValidationException.class, () -> {
+            service.addStudent(student);
+        });
+    }
+
+    @Test
     void addStudentEmailNull() {
         Student student = new Student("123", "Ioan", 935, null);
         assertThrows(ValidationException.class, () -> service.addStudent(student));
+    }
+
+    @Test
+    void addStudentNameTooLong() {
+        Student student = new Student("123", "123456789012345678901", 935, "mail@mail.com");
+        assertThrows(ValidationException.class, () -> {
+            service.addStudent(student);
+        });
     }
 }
