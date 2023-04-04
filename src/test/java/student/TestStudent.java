@@ -65,5 +65,15 @@ public class TestStudent {
         });
     }
 
+    @Test
+    void addStudentEmailEmpty() {
+        Student student = new Student("123", "Ioan", 935, "");
+        assertThrows(ValidationException.class, () -> service.addStudent(student));
+    }
 
+    @Test
+    void addStudentEmailNull() {
+        Student student = new Student("123", "Ioan", 935, null);
+        assertThrows(ValidationException.class, () -> service.addStudent(student));
+    }
 }
