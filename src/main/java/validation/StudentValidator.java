@@ -20,6 +20,12 @@ public class StudentValidator implements Validator<Student> {
         if(entity.getNume() == ""){
             throw new ValidationException("Nume incorect!");
         }
+        if(entity.getNume().length() < 2){
+            throw new ValidationException("Nume incorect!");
+        }
+        if(entity.getNume().length() > 20){
+            throw new ValidationException("Nume incorect!");
+        }
         if(entity.getGrupa() < 0) {
             throw new ValidationException("Grupa incorecta!");
         }
