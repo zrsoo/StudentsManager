@@ -65,5 +65,21 @@ public class TestStudent {
         });
     }
 
+    @Test
+    void addStudentNameTooShort(){
+        Student student = new Student("123", "a", 935, "mail@mail.com");
+        assertThrows(ValidationException.class, () -> {
+            service.addStudent(student);
+        });
+    }
+
+    @Test
+    void addStudentNameTooLong(){
+        Student student = new Student("123", "123456789012345678901", 935, "mail@mail.com");
+        assertThrows(ValidationException.class, () -> {
+            service.addStudent(student);
+        });
+    }
+
 
 }
