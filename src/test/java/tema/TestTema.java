@@ -1,6 +1,7 @@
 package tema;
 
 import domain.Student;
+import domain.Tema;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.NotaXMLRepo;
@@ -38,5 +39,19 @@ public class TestTema {
 
     }
 
+    @Test
+    void addTemaIdEmpty() {
+        Tema tema = new Tema("", "descriere", 10, 2);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
 
+    @Test
+    void addTemaDescriereEmpty() {
+        Tema tema = new Tema("", "", 10, 2);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
 }
