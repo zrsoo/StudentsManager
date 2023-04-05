@@ -40,30 +40,60 @@ public class TestTema {
     }
 
     @Test
-    void addTemaEmptyId()
-    {
-        Tema tema = new Tema("", "asd", 12, 12);
-
+    void addTemaIdEmpty() {
+        Tema tema = new Tema("", "descriere", 10, 2);
         assertThrows(ValidationException.class, () -> {
             service.addTema(tema);
         });
     }
 
     @Test
-    void addTemaNullId()
-    {
-        Tema tema = new Tema(null, "asd", 12, 12);
-
+    void addTemaIdNull() {
+        Tema tema = new Tema(null, "descriere", 10, 2);
         assertThrows(ValidationException.class, () -> {
             service.addTema(tema);
         });
     }
 
     @Test
-    void addTemaEmptyDescription()
-    {
-        Tema tema = new Tema("100", "", 12, 12);
+    void addTemaDescriereEmpty() {
+        Tema tema = new Tema("", "", 10, 2);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
 
+    @Test
+    void addTemaSmallDeadline()
+    {
+        Tema tema = new Tema("100", "asd", 0, 2);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
+
+    @Test
+    void addTemaSmallBigDeadline()
+    {
+        Tema tema = new Tema("100", "asd", 16, 2);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
+
+    @Test
+    void addTemaSmallPrimire()
+    {
+        Tema tema = new Tema("100", "asd", 2, 0);
+        assertThrows(ValidationException.class, () -> {
+            service.addTema(tema);
+        });
+    }
+
+    @Test
+    void addTemaBigPrimire()
+    {
+        Tema tema = new Tema("100", "asd", 2, 16);
         assertThrows(ValidationException.class, () -> {
             service.addTema(tema);
         });
